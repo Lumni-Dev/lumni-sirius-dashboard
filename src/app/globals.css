@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+}
+
+html,
+body {
+  padding: 0;
+  margin: 0;
+}
+
+body {
+  @apply bg-base text-text font-sans antialiased;
+  background-image:
+    radial-gradient(900px 500px at 15% -10%, rgba(124, 108, 255, 0.14), transparent 60%),
+    radial-gradient(700px 500px at 110% 0%, rgba(62, 207, 142, 0.08), transparent 55%);
+  background-attachment: fixed;
+  min-height: 100vh;
+}
+
+@layer components {
+  .card {
+    @apply rounded-2xl border border-border bg-surface/80 p-5 backdrop-blur;
+  }
+
+  .kpi-label {
+    @apply text-xs font-medium uppercase tracking-wide text-faint;
+  }
+
+  .kpi-value {
+    @apply mt-1 text-2xl font-semibold text-text;
+  }
+
+  .kpi-hint {
+    @apply mt-1 text-xs text-muted;
+  }
+
+  .section-title {
+    @apply text-sm font-semibold uppercase tracking-wide text-muted;
+  }
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  background: #2c2c3d;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
