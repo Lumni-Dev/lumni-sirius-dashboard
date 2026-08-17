@@ -1,18 +1,14 @@
 import type { NextAuthOptions } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { queryOne } from "./db";
+import { enginePost } from "./engine";
 
-// So entra quem ja e' usuario do Sirius: existe em sessions ou tem request_log.
+// So entra quem ja e' usuario do Sirius: o engine confere em sessions/request_log.
 async function isSiriusUser(email: string): Promise<boolean> {
   try {
-    const row = await queryOne<{ ok: boolean }>(
-      `SELECT (
-         EXISTS(SELECT 1 FROM sessions WHERE LOWER(email) = LOWER($1))
-         OR EXISTS(SELECT 1 FROM request_log WHERE LOWER(user_email) = LOWER($1))
-       ) AS ok`,
-      [email],
-    );
-    return Boolean(row?.ok);
+    const data = await enginePost<{ exists: boolean }>("/engine_user_exists", {
+      email,
+    });
+    return Boolean(data?.exists);
   } catch (err) {
     console.error("[auth] falha ao validar usuario do Sirius:", err);
     return false;

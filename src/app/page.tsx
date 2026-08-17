@@ -1,13 +1,7 @@
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/lib/auth";
-import {
-  getAccount,
-  getBreakdown,
-  getHeatmap,
-  getOverview,
-  getSeries,
-} from "@/lib/metrics";
+import { getMetrics } from "@/lib/metrics";
 import type { Account } from "@/lib/types";
 import { normalizeRange } from "@/lib/range";
 import {
@@ -46,17 +40,31 @@ export default async function DashboardPage({
   const sub = session?.googleSub ?? "";
   const range = normalizeRange(searchParams?.range);
 
-  const [overview, series, byModel, byEffort, byMode, byPersona, heat, account] =
-    await Promise.all([
-      getOverview(email, range),
-      getSeries(email, range),
-      getBreakdown(email, range, "model"),
-      getBreakdown(email, range, "effort"),
-      getBreakdown(email, range, "mode"),
-      getBreakdown(email, range, "personality"),
-      getHeatmap(email, range),
-      getAccount(email, sub),
-    ]);
+  let metrics;
+  try {
+    metrics = await getMetrics(email, sub, range);
+  } catch (err) {
+    console.error("[dashboard] engine indisponivel:", err);
+    return (
+      <main className="mx-auto max-w-6xl px-5 py-8">
+        <div className="card text-center text-sm text-muted">
+          Nao foi possivel carregar os dados agora. O engine esta indisponivel —
+          tente novamente em instantes.
+        </div>
+      </main>
+    );
+  }
+
+  const {
+    overview,
+    series,
+    byModel,
+    byEffort,
+    byMode,
+    byPersona,
+    heatmap: heat,
+    account,
+  } = metrics;
 
   const browserPct =
     overview.requests > 0
