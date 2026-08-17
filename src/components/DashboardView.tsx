@@ -11,6 +11,10 @@ import {
 } from "@/lib/format";
 import KpiCard from "@/components/KpiCard";
 import RangeFilter from "@/components/RangeFilter";
+import {
+  PendingOverlay,
+  RangeTransitionProvider,
+} from "@/components/RangeTransition";
 import Section from "@/components/Section";
 import Heatmap from "@/components/Heatmap";
 import {
@@ -55,7 +59,7 @@ export default function DashboardView({
       : 0;
 
   return (
-    <>
+    <RangeTransitionProvider>
       <header className="sticky top-0 z-20 border-b border-border bg-base/85 backdrop-blur">
         <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-3">
           <div className="leading-none">
@@ -73,7 +77,8 @@ export default function DashboardView({
         </div>
       </header>
 
-      <main className="mx-auto max-w-6xl px-5 pb-12 pt-6">
+      <PendingOverlay>
+        <main className="mx-auto max-w-6xl px-5 pb-12 pt-6">
         {overview.requests === 0 ? (
           <div className="card mt-2 flex flex-col items-center gap-3 py-16 text-center">
             <h2 className="font-brand text-base font-semibold uppercase tracking-[0.18em] text-text">
@@ -189,8 +194,9 @@ export default function DashboardView({
             </Section>
           </div>
         ) : null}
-      </main>
-    </>
+        </main>
+      </PendingOverlay>
+    </RangeTransitionProvider>
   );
 }
 
