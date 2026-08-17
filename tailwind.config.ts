@@ -9,11 +9,11 @@ const config: Config = {
     extend: {
       colors: {
         base: "#050507",
-        elevated: "#0c0c10",
-        surface: "#0c0c10",
+        elevated: "rgba(255, 255, 255, 0.05)",
+        surface: "rgba(17, 17, 17, 0.72)",
         fill: "rgba(255, 255, 255, 0.04)",
         "fill-strong": "rgba(255, 255, 255, 0.07)",
-        border: "rgba(255, 255, 255, 0.08)",
+        border: "rgba(255, 255, 255, 0.06)",
         "border-strong": "rgba(255, 255, 255, 0.14)",
         text: "#f0f1f5",
         muted: "#8a8b96",

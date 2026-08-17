@@ -23,7 +23,7 @@ import { fmtDayLabel, fmtInt } from "@/lib/format";
 const AXIS = { stroke: "#5c5d68", fontSize: 11 };
 const GRID = "rgba(255, 255, 255, 0.07)";
 const TOOLTIP_STYLE = {
-  background: "#0c0c10",
+  background: "#141416",
   border: "1px solid rgba(255, 255, 255, 0.14)",
   borderRadius: "10px",
   color: "#f0f1f5",
