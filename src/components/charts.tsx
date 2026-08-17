@@ -125,7 +125,9 @@ export function LatencyLine({ data }: { data: DayPoint[] }) {
 }
 
 export function BreakdownDonut({ data }: { data: BreakdownItem[] }) {
-  const grouped = groupTop(data, 7);
+  // Modelos sao poucos por natureza: teto alto para que cada modelo apareca com
+  // nome proprio (em vez de sumir dentro de "Outros"). So agrupa cauda extrema.
+  const grouped = groupTop(data, 16);
   if (grouped.length === 0) return <Empty />;
   return (
     <ResponsiveContainer width="100%" height={260}>
@@ -194,14 +196,13 @@ function groupTop(data: BreakdownItem[], top: number): BreakdownItem[] {
   if (sorted.length <= top) return sorted;
   const head = sorted.slice(0, top);
   const rest = sorted.slice(top);
-  const other = rest.reduce(
-    (acc, item) => ({
-      label: "Outros",
-      requests: acc.requests + item.requests,
-      totalTokens: acc.totalTokens + item.totalTokens,
-    }),
-    { label: "Outros", requests: 0, totalTokens: 0 } as BreakdownItem,
-  );
+  // Rotulo explicito com quantos itens foram agrupados: o corte nunca some em
+  // silencio, o usuario ve que ha mais alem do que esta desenhado.
+  const other: BreakdownItem = {
+    label: `Outros (${rest.length})`,
+    requests: rest.reduce((sum, item) => sum + item.requests, 0),
+    totalTokens: rest.reduce((sum, item) => sum + item.totalTokens, 0),
+  };
   return [...head, other];
 }
 
