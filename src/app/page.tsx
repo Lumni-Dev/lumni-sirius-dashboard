@@ -72,9 +72,10 @@ export default async function DashboardPage({
       : 0;
 
   return (
-    <main className="mx-auto max-w-6xl px-5 pb-12">
-      <header className="sticky top-0 z-20 -mx-5 mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-border bg-base/85 px-5 py-3 backdrop-blur">
-        <div className="leading-none">
+    <>
+      <header className="sticky top-0 z-20 border-b border-border bg-base/85 backdrop-blur">
+        <div className="mx-auto flex max-w-6xl flex-wrap items-center justify-between gap-4 px-5 py-3">
+          <div className="leading-none">
           <div className="font-brand text-xl font-bold uppercase tracking-[0.08em] text-text">
             Sirius
           </div>
@@ -97,8 +98,11 @@ export default async function DashboardPage({
             <span className="hidden text-xs text-muted sm:block">{email}</span>
           </div>
           <SignOutButton />
+          </div>
         </div>
       </header>
+
+      <main className="mx-auto max-w-6xl px-5 pb-12 pt-6">
 
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <KpiCard
@@ -206,6 +210,7 @@ export default async function DashboardPage({
       </div>
 
     </main>
+    </>
   );
 }
 
