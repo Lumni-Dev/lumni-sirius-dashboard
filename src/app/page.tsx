@@ -104,6 +104,20 @@ export default async function DashboardPage({
 
       <main className="mx-auto max-w-6xl px-5 pb-12 pt-6">
 
+      {overview.requests === 0 ? (
+        <div className="card mt-2 flex flex-col items-center gap-3 py-16 text-center">
+          <h2 className="font-brand text-base font-semibold uppercase tracking-[0.18em] text-text">
+            Nenhuma atividade ainda
+          </h2>
+          <p className="max-w-md text-sm text-muted">
+            {range === "all"
+              ? "Assim que voce usar o Sirius, as suas metricas de uso aparecem aqui."
+              : 'Nada de atividade neste periodo. Tente o filtro "Tudo" ali em cima para ver todo o historico.'}
+          </p>
+        </div>
+      ) : (
+        <>
+
       <div className="grid grid-cols-2 gap-4 lg:grid-cols-4">
         <KpiCard
           accent
@@ -155,12 +169,6 @@ export default async function DashboardPage({
         <KpiCard label="Ultima atividade" value={fmtDateTimeFromIso(overview.lastAt)} />
       </div>
 
-      {overview.requests === 0 ? (
-        <div className="card mt-8 text-center text-sm text-muted">
-          Nenhuma atividade registrada no periodo selecionado.
-        </div>
-      ) : null}
-
       <div className="mt-8 grid gap-6 lg:grid-cols-2">
         <Section title="Requisicoes por dia">
           <RequestsArea data={series} />
@@ -202,6 +210,8 @@ export default async function DashboardPage({
           <Heatmap cells={heat} />
         </Section>
       </div>
+        </>
+      )}
 
       <div className="mt-6">
         <Section title="Conta">
