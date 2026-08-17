@@ -20,6 +20,34 @@ export interface Metrics {
   account: Account;
 }
 
+// Rotulos em portugues (mesmos do lumni-sirius-app) para os valores crus que
+// vem do banco. Traducao so na exibicao; o banco continua com os valores originais.
+const EFFORT_PT: Record<string, string> = {
+  low: "Baixo",
+  medium: "Médio",
+  high: "Alto",
+  xhigh: "Muito alto",
+  max: "Máximo",
+};
+
+const MODE_PT: Record<string, string> = {
+  default: "Perguntar antes de executar",
+  ask: "Pedir permissão",
+  plan: "Planejar antes de executar",
+  acceptEdits: "Aceitar edições de arquivo",
+  bypassPermissions: "Executar tudo automaticamente",
+  auto: "Automático",
+  dontAsk: "Não perguntar",
+  manual: "Manual",
+};
+
+function translateLabels(
+  items: BreakdownItem[],
+  map: Record<string, string>,
+): BreakdownItem[] {
+  return items.map((item) => ({ ...item, label: map[item.label] ?? item.label }));
+}
+
 // Busca tudo do engine numa unica chamada e preenche os dias vazios da serie.
 export async function getMetrics(
   email: string,
@@ -32,8 +60,8 @@ export async function getMetrics(
     overview: data.overview,
     series: fillGaps(data.series || [], rangeDays(range)),
     byModel: data.byModel || [],
-    byEffort: data.byEffort || [],
-    byMode: data.byMode || [],
+    byEffort: translateLabels(data.byEffort || [], EFFORT_PT),
+    byMode: translateLabels(data.byMode || [], MODE_PT),
     byPersona: data.byPersona || [],
     heatmap: data.heatmap || [],
     account: data.account,
