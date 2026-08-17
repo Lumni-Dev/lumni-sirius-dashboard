@@ -1,5 +1,20 @@
 import type { Metadata, Viewport } from "next";
+import { Space_Grotesk, Orbitron } from "next/font/google";
 import "./globals.css";
+
+const sans = Space_Grotesk({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-sans",
+  display: "swap",
+});
+
+const brand = Orbitron({
+  subsets: ["latin"],
+  weight: ["400", "500", "600", "700"],
+  variable: "--font-brand",
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   title: "Sirius Dashboard",
@@ -7,7 +22,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#141414",
+  themeColor: "#050507",
 };
 
 export default function RootLayout({
@@ -16,7 +31,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="pt-BR">
+    <html lang="pt-BR" className={`${sans.variable} ${brand.variable}`}>
       <body>{children}</body>
     </html>
   );

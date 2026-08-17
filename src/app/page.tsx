@@ -72,16 +72,14 @@ export default async function DashboardPage({
       : 0;
 
   return (
-    <main className="mx-auto max-w-6xl px-5 py-8">
-      <header className="mb-8 flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-3">
-          <div className="flex h-9 w-9 items-center justify-center rounded-md bg-accent font-brand text-sm font-black text-on-accent">
-            S
-          </div>
-          <div>
-            <h1 className="text-lg font-bold leading-tight tracking-tight">Sirius Dashboard</h1>
-            <p className="text-xs text-faint">Suas metricas de uso</p>
-          </div>
+    <main className="mx-auto max-w-6xl px-5 pb-12">
+      <header className="sticky top-0 z-20 -mx-5 mb-6 flex flex-wrap items-center justify-between gap-4 border-b border-border bg-base/85 px-5 py-3 backdrop-blur">
+        <div className="flex flex-col leading-none">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/sirius-logo.png" alt="Sirius" className="h-8 w-8" />
+          <span className="mt-1.5 font-brand text-[10px] font-semibold uppercase tracking-[0.18em] text-muted">
+            Dashboard
+          </span>
         </div>
         <div className="flex flex-wrap items-center gap-3">
           <RangeFilter active={range} />

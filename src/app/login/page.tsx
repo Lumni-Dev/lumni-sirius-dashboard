@@ -16,10 +16,11 @@ export default function LoginPage({
   return (
     <main className="flex min-h-screen items-center justify-center px-6">
       <div className="card w-full max-w-sm text-center">
-        <div className="mx-auto mb-5 flex h-12 w-12 items-center justify-center rounded-md bg-accent font-brand text-xl font-black text-on-accent">
-          S
-        </div>
-        <h1 className="text-xl font-bold tracking-tight">Sirius Dashboard</h1>
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img src="/sirius-logo.png" alt="Sirius" className="mx-auto h-14 w-14" />
+        <h1 className="mt-3 font-brand text-lg font-semibold uppercase tracking-[0.2em]">
+          Dashboard
+        </h1>
         <p className="mt-2 text-sm text-muted">
           Entre com a mesma conta Google que voce usa no Sirius para ver as suas
           metricas de uso.

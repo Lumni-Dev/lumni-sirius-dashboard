@@ -20,26 +20,26 @@ import {
 import type { BreakdownItem, DayPoint } from "@/lib/types";
 import { fmtDayLabel, fmtInt } from "@/lib/format";
 
-const AXIS = { stroke: "#737373", fontSize: 11 };
-const GRID = "#272727";
+const AXIS = { stroke: "#5c5d68", fontSize: 11 };
+const GRID = "rgba(255, 255, 255, 0.07)";
 const TOOLTIP_STYLE = {
-  background: "#1e1e1e",
-  border: "1px solid #333333",
+  background: "#0c0c10",
+  border: "1px solid rgba(255, 255, 255, 0.14)",
   borderRadius: "10px",
-  color: "#f2f2f2",
+  color: "#f0f1f5",
   fontSize: "12px",
 };
-const LEGEND_STYLE = { fontSize: 12, color: "#a6a6a6" };
-// Rampa monocromatica "ink" com o verde da marca como destaque.
+const LEGEND_STYLE = { fontSize: 12, color: "#8a8b96" };
+// Rampa monocromatica (sem verde), no espirito do lumni-sirius-app.
 const PALETTE = [
-  "#f2f2f2",
-  "#c9c9c9",
-  "#a6a6a6",
-  "#8a8a8a",
-  "#6f6f6f",
-  "#34c76c",
-  "#565656",
-  "#3f3f3f",
+  "#f0f1f5",
+  "#c7c8d0",
+  "#9a9ba5",
+  "#75767f",
+  "#55565f",
+  "#3d3e45",
+  "#8a8b96",
+  "#2a2b30",
 ];
 
 function labelTick(value: string): string {
@@ -64,7 +64,7 @@ export function RequestsArea({ data }: { data: DayPoint[] }) {
           labelFormatter={labelTick}
           formatter={(value) => [fmtInt(Number(value)), "Requisicoes"]}
         />
-        <Area type="monotone" dataKey="requests" stroke="#f2f2f2" strokeWidth={2} fill="url(#reqFill)" />
+        <Area type="monotone" dataKey="requests" stroke="#f0f1f5" strokeWidth={2} fill="url(#reqFill)" />
       </AreaChart>
     </ResponsiveContainer>
   );
@@ -89,8 +89,8 @@ export function TokensBars({ data }: { data: DayPoint[] }) {
           wrapperStyle={LEGEND_STYLE}
           formatter={(name) => (name === "inputTokens" ? "Entrada" : "Saida")}
         />
-        <Bar dataKey="inputTokens" stackId="t" fill="#e6e6e6" />
-        <Bar dataKey="outputTokens" stackId="t" fill="#34c76c" radius={[3, 3, 0, 0]} />
+        <Bar dataKey="inputTokens" stackId="t" fill="#e8e9ee" />
+        <Bar dataKey="outputTokens" stackId="t" fill="#6b6c78" radius={[3, 3, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
   );
@@ -108,7 +108,7 @@ export function LatencyLine({ data }: { data: DayPoint[] }) {
           labelFormatter={labelTick}
           formatter={(value) => [`${Number(value).toFixed(2)} s`, "Latencia media"]}
         />
-        <Line type="monotone" dataKey="avgLatency" stroke="#a6a6a6" strokeWidth={2} dot={false} />
+        <Line type="monotone" dataKey="avgLatency" stroke="#8a8b96" strokeWidth={2} dot={false} />
       </LineChart>
     </ResponsiveContainer>
   );
@@ -132,7 +132,7 @@ export function BreakdownDonut({ data }: { data: BreakdownItem[] }) {
           innerRadius={55}
           outerRadius={95}
           paddingAngle={2}
-          stroke="#141414"
+          stroke="#050507"
         >
           {grouped.map((_, i) => (
             <Cell key={i} fill={PALETTE[i % PALETTE.length]} />

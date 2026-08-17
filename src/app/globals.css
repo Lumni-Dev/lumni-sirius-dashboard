@@ -2,57 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ---------- fontes self-hosted (mesmas da landing/app) ---------- */
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/inter-latin-400-normal.woff2") format("woff2");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/inter-latin-500-normal.woff2") format("woff2");
-  font-weight: 500;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/inter-latin-600-normal.woff2") format("woff2");
-  font-weight: 600;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/inter-latin-700-normal.woff2") format("woff2");
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Inter";
-  src: url("/fonts/inter-latin-800-normal.woff2") format("woff2");
-  font-weight: 800;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Orbitron";
-  src: url("/fonts/Orbitron-Regular.ttf") format("truetype");
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-@font-face {
-  font-family: "Orbitron";
-  src: url("/fonts/Orbitron-Bold.ttf") format("truetype");
-  font-weight: 900;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   color-scheme: dark;
 }
@@ -65,20 +14,7 @@ body {
 
 body {
   @apply bg-base text-text font-sans antialiased;
-  background-image: radial-gradient(
-    720px 420px at 50% -12%,
-    rgba(255, 255, 255, 0.045),
-    transparent 70%
-  );
-  background-attachment: fixed;
   min-height: 100vh;
-  line-height: 1.6;
-  text-rendering: optimizeLegibility;
-}
-
-::selection {
-  background: #ffffff;
-  color: #000000;
 }
 
 @layer components {
@@ -87,11 +23,11 @@ body {
   }
 
   .kpi-label {
-    @apply text-[11px] font-semibold uppercase tracking-[0.12em] text-faint;
+    @apply text-[11px] font-medium uppercase tracking-[0.12em] text-faint;
   }
 
   .kpi-value {
-    @apply mt-1.5 text-2xl font-extrabold tracking-tight text-text;
+    @apply mt-1.5 text-2xl font-bold tracking-tight text-text;
   }
 
   .kpi-hint {
@@ -99,27 +35,21 @@ body {
   }
 
   .section-title {
-    @apply text-xs font-bold uppercase tracking-[0.14em] text-muted;
-  }
-
-  .brand-word {
-    @apply font-brand uppercase tracking-[0.2em] font-normal;
+    @apply text-xs font-semibold uppercase tracking-[0.14em] text-muted;
   }
 }
 
-/* scrollbars finas e claras, como no app/landing */
 ::-webkit-scrollbar {
-  width: 10px;
-  height: 10px;
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.18);
 }
 ::-webkit-scrollbar-track {
   background: transparent;
-}
-::-webkit-scrollbar-thumb {
-  background: #3a3a3a;
-  border-radius: 5px;
-  border: 3px solid #141414;
-}
-::-webkit-scrollbar-thumb:hover {
-  background: #4a4a4a;
 }
