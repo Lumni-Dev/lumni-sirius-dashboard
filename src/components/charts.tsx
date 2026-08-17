@@ -29,6 +29,10 @@ const TOOLTIP_STYLE = {
   color: "#f0f1f5",
   fontSize: "12px",
 };
+// Texto do tooltip sempre claro: o marcador ao lado ja indica a cor da serie,
+// e algumas cores da PALETTE sao escuras demais para servir de texto.
+const TOOLTIP_ITEM_STYLE = { color: "#f0f1f5" };
+const TOOLTIP_LABEL_STYLE = { color: "#f0f1f5", marginBottom: "2px" };
 const LEGEND_STYLE = { fontSize: 12, color: "#8a8b96" };
 // Rampa monocromatica (sem verde), no espirito do lumni-sirius-app.
 const PALETTE = [
@@ -61,6 +65,8 @@ export function RequestsArea({ data }: { data: DayPoint[] }) {
         <YAxis tick={AXIS} tickLine={false} axisLine={false} allowDecimals={false} width={44} />
         <Tooltip
           contentStyle={TOOLTIP_STYLE}
+          itemStyle={TOOLTIP_ITEM_STYLE}
+          labelStyle={TOOLTIP_LABEL_STYLE}
           labelFormatter={labelTick}
           formatter={(value) => [fmtInt(Number(value)), "Requisicoes"]}
         />
@@ -79,6 +85,8 @@ export function TokensBars({ data }: { data: DayPoint[] }) {
         <YAxis tick={AXIS} tickLine={false} axisLine={false} width={44} tickFormatter={(v) => fmtInt(Number(v))} />
         <Tooltip
           contentStyle={TOOLTIP_STYLE}
+          itemStyle={TOOLTIP_ITEM_STYLE}
+          labelStyle={TOOLTIP_LABEL_STYLE}
           labelFormatter={labelTick}
           formatter={(value, name) => [
             fmtInt(Number(value)),
@@ -105,6 +113,8 @@ export function LatencyLine({ data }: { data: DayPoint[] }) {
         <YAxis tick={AXIS} tickLine={false} axisLine={false} width={44} tickFormatter={(v) => `${Number(v).toFixed(1)}s`} />
         <Tooltip
           contentStyle={TOOLTIP_STYLE}
+          itemStyle={TOOLTIP_ITEM_STYLE}
+          labelStyle={TOOLTIP_LABEL_STYLE}
           labelFormatter={labelTick}
           formatter={(value) => [`${Number(value).toFixed(2)} s`, "Latencia media"]}
         />
@@ -122,6 +132,8 @@ export function BreakdownDonut({ data }: { data: BreakdownItem[] }) {
       <PieChart>
         <Tooltip
           contentStyle={TOOLTIP_STYLE}
+          itemStyle={TOOLTIP_ITEM_STYLE}
+          labelStyle={TOOLTIP_LABEL_STYLE}
           formatter={(value, name) => [fmtInt(Number(value)), String(name)]}
         />
         <Legend wrapperStyle={LEGEND_STYLE} />
@@ -162,6 +174,8 @@ export function BreakdownBars({ data }: { data: BreakdownItem[] }) {
         />
         <Tooltip
           contentStyle={TOOLTIP_STYLE}
+          itemStyle={TOOLTIP_ITEM_STYLE}
+          labelStyle={TOOLTIP_LABEL_STYLE}
           cursor={{ fill: "rgba(255,255,255,0.06)" }}
           formatter={(value) => [fmtInt(Number(value)), "Requisicoes"]}
         />
