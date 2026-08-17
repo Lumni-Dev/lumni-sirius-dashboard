@@ -12,9 +12,9 @@ export default function RangeFilter({ active }: { active: RangeKey }) {
             href={`/?range=${key}`}
             scroll={false}
             className={
-              "rounded-lg px-3 py-1.5 text-xs font-medium transition " +
+              "rounded-md px-3 py-1.5 text-xs font-semibold transition " +
               (isActive
-                ? "bg-accent text-white"
+                ? "bg-accent text-on-accent"
                 : "text-muted hover:text-text")
             }
           >

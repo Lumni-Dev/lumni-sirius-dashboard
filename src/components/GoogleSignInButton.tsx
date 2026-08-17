@@ -7,7 +7,7 @@ export default function GoogleSignInButton() {
     <button
       type="button"
       onClick={() => signIn("google", { callbackUrl: "/" })}
-      className="mt-6 w-full rounded-xl bg-accent px-4 py-3 text-sm font-semibold text-white transition hover:bg-accent/90"
+      className="mt-6 w-full rounded-md bg-accent px-4 py-3 text-sm font-semibold text-on-accent transition hover:opacity-85"
     >
       Entrar com Google
     </button>

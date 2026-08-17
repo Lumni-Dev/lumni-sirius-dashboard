@@ -48,7 +48,7 @@ export default function Heatmap({ cells }: { cells: HeatCell[] }) {
 }
 
 function cellColor(value: number, max: number): string {
-  if (max <= 0 || value <= 0) return "rgba(124, 108, 255, 0.05)";
-  const alpha = 0.15 + 0.8 * (value / max);
-  return `rgba(124, 108, 255, ${alpha.toFixed(3)})`;
+  if (max <= 0 || value <= 0) return "rgba(255, 255, 255, 0.04)";
+  const alpha = 0.12 + 0.78 * (value / max);
+  return `rgba(255, 255, 255, ${alpha.toFixed(3)})`;
 }

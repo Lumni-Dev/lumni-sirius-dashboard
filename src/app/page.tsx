@@ -67,11 +67,11 @@ export default async function DashboardPage({
     <main className="mx-auto max-w-6xl px-5 py-8">
       <header className="mb-8 flex flex-wrap items-center justify-between gap-4">
         <div className="flex items-center gap-3">
-          <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-accent/15 text-lg text-accent-soft">
-            <span aria-hidden>◎</span>
+          <div className="flex h-9 w-9 items-center justify-center rounded-md bg-accent font-brand text-sm font-black text-on-accent">
+            S
           </div>
           <div>
-            <h1 className="text-lg font-semibold leading-tight">Sirius Dashboard</h1>
+            <h1 className="text-lg font-bold leading-tight tracking-tight">Sirius Dashboard</h1>
             <p className="text-xs text-faint">Suas metricas de uso</p>
           </div>
         </div>

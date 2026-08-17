@@ -20,24 +20,26 @@ import {
 import type { BreakdownItem, DayPoint } from "@/lib/types";
 import { fmtDayLabel, fmtInt } from "@/lib/format";
 
-const AXIS = { stroke: "#5a5a70", fontSize: 11 };
-const GRID = "#262635";
+const AXIS = { stroke: "#737373", fontSize: 11 };
+const GRID = "#272727";
 const TOOLTIP_STYLE = {
-  background: "#12121d",
-  border: "1px solid #262635",
+  background: "#1e1e1e",
+  border: "1px solid #333333",
   borderRadius: "10px",
-  color: "#e8e8f2",
+  color: "#f2f2f2",
   fontSize: "12px",
 };
+const LEGEND_STYLE = { fontSize: 12, color: "#a6a6a6" };
+// Rampa monocromatica "ink" com o verde da marca como destaque.
 const PALETTE = [
-  "#7c6cff",
-  "#3ecf8e",
-  "#f5a623",
-  "#ff5c5c",
-  "#4aa8ff",
-  "#c56cff",
-  "#e8e8f2",
-  "#8a8aa0",
+  "#f2f2f2",
+  "#c9c9c9",
+  "#a6a6a6",
+  "#8a8a8a",
+  "#6f6f6f",
+  "#34c76c",
+  "#565656",
+  "#3f3f3f",
 ];
 
 function labelTick(value: string): string {
@@ -50,8 +52,8 @@ export function RequestsArea({ data }: { data: DayPoint[] }) {
       <AreaChart data={data} margin={{ top: 8, right: 12, bottom: 0, left: -12 }}>
         <defs>
           <linearGradient id="reqFill" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stopColor="#7c6cff" stopOpacity={0.5} />
-            <stop offset="100%" stopColor="#7c6cff" stopOpacity={0} />
+            <stop offset="0%" stopColor="#ffffff" stopOpacity={0.28} />
+            <stop offset="100%" stopColor="#ffffff" stopOpacity={0} />
           </linearGradient>
         </defs>
         <CartesianGrid stroke={GRID} vertical={false} />
@@ -62,7 +64,7 @@ export function RequestsArea({ data }: { data: DayPoint[] }) {
           labelFormatter={labelTick}
           formatter={(value) => [fmtInt(Number(value)), "Requisicoes"]}
         />
-        <Area type="monotone" dataKey="requests" stroke="#7c6cff" strokeWidth={2} fill="url(#reqFill)" />
+        <Area type="monotone" dataKey="requests" stroke="#f2f2f2" strokeWidth={2} fill="url(#reqFill)" />
       </AreaChart>
     </ResponsiveContainer>
   );
@@ -84,11 +86,11 @@ export function TokensBars({ data }: { data: DayPoint[] }) {
           ]}
         />
         <Legend
-          wrapperStyle={{ fontSize: 12, color: "#8a8aa0" }}
+          wrapperStyle={LEGEND_STYLE}
           formatter={(name) => (name === "inputTokens" ? "Entrada" : "Saida")}
         />
-        <Bar dataKey="inputTokens" stackId="t" fill="#7c6cff" radius={[0, 0, 0, 0]} />
-        <Bar dataKey="outputTokens" stackId="t" fill="#3ecf8e" radius={[3, 3, 0, 0]} />
+        <Bar dataKey="inputTokens" stackId="t" fill="#e6e6e6" />
+        <Bar dataKey="outputTokens" stackId="t" fill="#34c76c" radius={[3, 3, 0, 0]} />
       </BarChart>
     </ResponsiveContainer>
   );
@@ -106,7 +108,7 @@ export function LatencyLine({ data }: { data: DayPoint[] }) {
           labelFormatter={labelTick}
           formatter={(value) => [`${Number(value).toFixed(2)} s`, "Latencia media"]}
         />
-        <Line type="monotone" dataKey="avgLatency" stroke="#f5a623" strokeWidth={2} dot={false} />
+        <Line type="monotone" dataKey="avgLatency" stroke="#a6a6a6" strokeWidth={2} dot={false} />
       </LineChart>
     </ResponsiveContainer>
   );
@@ -122,7 +124,7 @@ export function BreakdownDonut({ data }: { data: BreakdownItem[] }) {
           contentStyle={TOOLTIP_STYLE}
           formatter={(value, name) => [fmtInt(Number(value)), String(name)]}
         />
-        <Legend wrapperStyle={{ fontSize: 12, color: "#8a8aa0" }} />
+        <Legend wrapperStyle={LEGEND_STYLE} />
         <Pie
           data={grouped}
           dataKey="requests"
@@ -130,7 +132,7 @@ export function BreakdownDonut({ data }: { data: BreakdownItem[] }) {
           innerRadius={55}
           outerRadius={95}
           paddingAngle={2}
-          stroke="#12121d"
+          stroke="#141414"
         >
           {grouped.map((_, i) => (
             <Cell key={i} fill={PALETTE[i % PALETTE.length]} />
@@ -160,7 +162,7 @@ export function BreakdownBars({ data }: { data: BreakdownItem[] }) {
         />
         <Tooltip
           contentStyle={TOOLTIP_STYLE}
-          cursor={{ fill: "rgba(124,108,255,0.08)" }}
+          cursor={{ fill: "rgba(255,255,255,0.06)" }}
           formatter={(value) => [fmtInt(Number(value)), "Requisicoes"]}
         />
         <Bar dataKey="requests" radius={[0, 4, 4, 0]}>
