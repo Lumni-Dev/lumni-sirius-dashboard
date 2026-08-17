@@ -1,4 +1,5 @@
 import GoogleSignInButton from "@/components/GoogleSignInButton";
+import Starfield from "@/components/Starfield";
 
 export default function LoginPage({
   searchParams,
@@ -14,7 +15,8 @@ export default function LoginPage({
         : null;
 
   return (
-    <main className="flex min-h-screen items-center justify-center px-6">
+    <main className="relative flex min-h-screen items-center justify-center px-6">
+      <Starfield />
       <div className="card w-full max-w-sm text-center">
         <div className="font-brand text-3xl font-bold uppercase tracking-[0.1em] text-text">
           Sirius

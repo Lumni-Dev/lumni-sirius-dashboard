@@ -205,9 +205,6 @@ export default async function DashboardPage({
         </Section>
       </div>
 
-      <footer className="mt-10 text-center text-xs text-faint">
-        Sirius Dashboard · dados somente leitura do engine
-      </footer>
     </main>
   );
 }
