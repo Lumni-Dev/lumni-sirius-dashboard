@@ -101,7 +101,7 @@ export default function DashboardSkeleton({
 
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
           <Section title="Por modelo">
-            <ChartSkeleton />
+            <ListSkeleton />
           </Section>
           <Section title="Por esforco">
             <ChartSkeleton />
@@ -154,4 +154,20 @@ function KpiSkeleton({ label, withHint }: { label: string; withHint?: boolean })
 
 function ChartSkeleton() {
   return <Skeleton className="h-[260px] w-full rounded-lg" />;
+}
+
+function ListSkeleton() {
+  return (
+    <ul className="flex flex-col gap-3">
+      {Array.from({ length: 6 }).map((_, i) => (
+        <li key={i}>
+          <div className="mb-1 flex items-center justify-between gap-3">
+            <Skeleton className="h-3.5 w-28" />
+            <Skeleton className="h-3 w-12" />
+          </div>
+          <Skeleton className="h-1.5 w-full rounded-full" />
+        </li>
+      ))}
+    </ul>
+  );
 }

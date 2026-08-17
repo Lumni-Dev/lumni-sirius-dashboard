@@ -19,11 +19,11 @@ import Section from "@/components/Section";
 import Heatmap from "@/components/Heatmap";
 import {
   BreakdownBars,
-  BreakdownDonut,
   LatencyLine,
   RequestsArea,
   TokensBars,
 } from "@/components/charts";
+import BreakdownList from "@/components/BreakdownList";
 
 const TZ = process.env.DASHBOARD_TZ || "America/Sao_Paulo";
 
@@ -163,7 +163,7 @@ export default function DashboardView({
 
             <div className="mt-6 grid gap-6 lg:grid-cols-2">
               <Section title="Por modelo">
-                <BreakdownDonut data={byModel} />
+                <BreakdownList data={byModel} />
               </Section>
               <Section title="Por esforco">
                 <BreakdownBars data={byEffort} />

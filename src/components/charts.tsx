@@ -10,8 +10,6 @@ import {
   Legend,
   Line,
   LineChart,
-  Pie,
-  PieChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
@@ -120,39 +118,6 @@ export function LatencyLine({ data }: { data: DayPoint[] }) {
         />
         <Line type="monotone" dataKey="avgLatency" stroke="#8a8b96" strokeWidth={2} dot={false} />
       </LineChart>
-    </ResponsiveContainer>
-  );
-}
-
-export function BreakdownDonut({ data }: { data: BreakdownItem[] }) {
-  // Modelos sao poucos por natureza: teto alto para que cada modelo apareca com
-  // nome proprio (em vez de sumir dentro de "Outros"). So agrupa cauda extrema.
-  const grouped = groupTop(data, 16);
-  if (grouped.length === 0) return <Empty />;
-  return (
-    <ResponsiveContainer width="100%" height={260}>
-      <PieChart>
-        <Tooltip
-          contentStyle={TOOLTIP_STYLE}
-          itemStyle={TOOLTIP_ITEM_STYLE}
-          labelStyle={TOOLTIP_LABEL_STYLE}
-          formatter={(value, name) => [fmtInt(Number(value)), String(name)]}
-        />
-        <Legend wrapperStyle={LEGEND_STYLE} />
-        <Pie
-          data={grouped}
-          dataKey="requests"
-          nameKey="label"
-          innerRadius={55}
-          outerRadius={95}
-          paddingAngle={2}
-          stroke="#050507"
-        >
-          {grouped.map((_, i) => (
-            <Cell key={i} fill={PALETTE[i % PALETTE.length]} />
-          ))}
-        </Pie>
-      </PieChart>
     </ResponsiveContainer>
   );
 }
