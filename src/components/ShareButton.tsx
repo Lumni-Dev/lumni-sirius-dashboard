@@ -50,19 +50,21 @@ export default function ShareButton() {
         type="button"
         onClick={generate}
         disabled={status === "loading"}
-        className="rounded-lg border border-border bg-elevated px-3 py-1.5 text-xs font-medium text-muted transition hover:text-text disabled:cursor-not-allowed disabled:opacity-60"
+        aria-label="Compartilhar"
+        title="Compartilhar"
+        className="inline-flex h-8 w-8 items-center justify-center rounded-lg border border-border bg-elevated text-muted transition hover:text-text disabled:cursor-not-allowed disabled:opacity-60"
       >
-        {status === "loading" ? "Gerando..." : "Compartilhar"}
+        {status === "loading" ? <SpinnerIcon /> : <ShareIcon />}
       </button>
 
       {status === "error" ? (
-        <p className="absolute right-0 z-30 mt-2 w-64 rounded-lg border border-border bg-surface px-3 py-2 text-xs text-muted">
+        <p className="absolute right-0 z-30 mt-2 w-64 rounded-lg border border-border-strong bg-[#141416] px-3 py-2 text-xs text-muted shadow-xl">
           Nao foi possivel gerar o link agora. Tente novamente em instantes.
         </p>
       ) : null}
 
       {link ? (
-        <div className="absolute right-0 z-30 mt-2 w-80 rounded-lg border border-border bg-surface p-3 shadow-lg">
+        <div className="absolute right-0 z-30 mt-2 w-80 rounded-lg border border-border-strong bg-[#141416] p-3 shadow-xl">
           <div className="flex items-center justify-between gap-2">
             <span className="text-[11px] font-medium uppercase tracking-[0.12em] text-faint">
               Link de compartilhamento
@@ -81,7 +83,7 @@ export default function ShareButton() {
               readOnly
               value={link}
               onFocus={(e) => e.currentTarget.select()}
-              className="min-w-0 flex-1 rounded-md border border-border bg-elevated px-2 py-1.5 text-xs text-text outline-none"
+              className="min-w-0 flex-1 rounded-md border border-border bg-fill px-2 py-1.5 text-xs text-text outline-none"
             />
             <button
               type="button"
@@ -97,5 +99,35 @@ export default function ShareButton() {
         </div>
       ) : null}
     </div>
+  );
+}
+
+function ShareIcon() {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth={2}
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className="h-4 w-4"
+      aria-hidden
+    >
+      <circle cx="18" cy="5" r="3" />
+      <circle cx="6" cy="12" r="3" />
+      <circle cx="18" cy="19" r="3" />
+      <line x1="8.59" y1="13.51" x2="15.42" y2="17.49" />
+      <line x1="15.41" y1="6.51" x2="8.59" y2="10.49" />
+    </svg>
+  );
+}
+
+function SpinnerIcon() {
+  return (
+    <svg className="h-4 w-4 animate-spin" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <circle cx="12" cy="12" r="9" stroke="currentColor" strokeWidth={2} strokeOpacity={0.25} />
+      <path d="M21 12a9 9 0 0 0-9-9" stroke="currentColor" strokeWidth={2} strokeLinecap="round" />
+    </svg>
   );
 }

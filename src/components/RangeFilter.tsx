@@ -9,7 +9,7 @@ export default function RangeFilter({
   basePath?: string;
 }) {
   return (
-    <div className="inline-flex rounded-xl border border-border bg-surface p-1">
+    <div className="inline-flex h-8 items-center rounded-xl border border-border bg-surface p-0.5">
       {RANGES.map((key) => {
         const isActive = key === active;
         return (
@@ -18,7 +18,7 @@ export default function RangeFilter({
             href={`${basePath}?range=${key}`}
             scroll={false}
             className={
-              "rounded-md px-3 py-1.5 text-xs font-semibold transition " +
+              "flex h-full items-center rounded-md px-3 text-xs font-semibold transition " +
               (isActive
                 ? "bg-accent text-on-accent"
                 : "text-muted hover:text-text")

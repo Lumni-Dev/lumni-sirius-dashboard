@@ -6,10 +6,22 @@ import DashboardView from "@/components/DashboardView";
 
 export const dynamic = "force-dynamic";
 
+const TZ = process.env.DASHBOARD_TZ || "America/Sao_Paulo";
+
 // Link publico: nao deve ser indexado por buscadores.
 export const metadata: Metadata = {
   robots: { index: false, follow: false },
 };
+
+// Hora de expiracao no fuso do painel (o servidor roda em UTC, entao o fuso e'
+// sempre explicito).
+function fmtExpiry(epochMs: number): string {
+  return new Intl.DateTimeFormat("pt-BR", {
+    hour: "2-digit",
+    minute: "2-digit",
+    timeZone: TZ,
+  }).format(new Date(epochMs));
+}
 
 export default async function SharedDashboardPage({
   params,
@@ -50,9 +62,14 @@ export default async function SharedDashboardPage({
       basePath={`/shared/${params.token}`}
       showAccount={false}
       headerActions={
-        <span className="rounded-lg border border-border bg-elevated px-3 py-1.5 text-xs font-medium text-muted">
-          Somente leitura
-        </span>
+        <div className="flex items-center gap-2">
+          <span className="inline-flex h-8 items-center rounded-lg border border-border bg-elevated px-3 text-xs font-medium text-muted">
+            Somente leitura
+          </span>
+          <span className="inline-flex h-8 items-center rounded-lg border border-border bg-elevated px-3 text-xs font-medium text-muted">
+            Expira as {fmtExpiry(payload.exp)}
+          </span>
+        </div>
       }
     />
   );

@@ -17,6 +17,11 @@ interface SignedPayload extends SharePayload {
   exp: number; // epoch em milissegundos
 }
 
+// Dono do link mais o instante de expiracao (epoch em ms), retornado na validacao.
+export interface VerifiedShare extends SharePayload {
+  exp: number;
+}
+
 // Reusa NEXTAUTH_SECRET quando SHARE_LINK_SECRET nao esta definido, para nao
 // exigir configuracao extra. Sem segredo nao ha como assinar com seguranca.
 function getSecret(): string {
@@ -57,8 +62,9 @@ export function createShareToken(
   return `${encoded}${SEPARATOR}${signature}`;
 }
 
-// Valida o token: assinatura correta e nao expirado. Retorna o dono ou null.
-export function verifyShareToken(token: string, now: number): SharePayload | null {
+// Valida o token: assinatura correta e nao expirado. Retorna o dono e a
+// expiracao, ou null se invalido/expirado.
+export function verifyShareToken(token: string, now: number): VerifiedShare | null {
   if (typeof token !== "string" || !token) return null;
 
   const sepIndex = token.indexOf(SEPARATOR);
@@ -96,5 +102,9 @@ export function verifyShareToken(token: string, now: number): SharePayload | nul
   }
   if (now >= parsed.exp) return null;
 
-  return { email: parsed.email, sub: typeof parsed.sub === "string" ? parsed.sub : "" };
+  return {
+    email: parsed.email,
+    sub: typeof parsed.sub === "string" ? parsed.sub : "",
+    exp: parsed.exp,
+  };
 }
