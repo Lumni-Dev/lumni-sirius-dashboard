@@ -5,5 +5,7 @@ export default withAuth({
 });
 
 export const config = {
-  matcher: ["/((?!login|api/auth|_next/static|_next/image|favicon.ico).*)"],
+  // Protege tudo, menos login, rotas de auth, assets do _next e arquivos
+  // estaticos (qualquer caminho com extensao, ex.: .ico, .png, .svg).
+  matcher: ["/((?!login|api/auth|_next|.*\\..*).*)"],
 };

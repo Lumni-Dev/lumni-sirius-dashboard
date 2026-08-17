@@ -16,9 +16,10 @@ export default function LoginPage({
   return (
     <main className="flex min-h-screen items-center justify-center px-6">
       <div className="card w-full max-w-sm text-center">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src="/sirius-logo.png" alt="Sirius" className="mx-auto h-14 w-14" />
-        <h1 className="mt-3 font-brand text-lg font-semibold uppercase tracking-[0.2em]">
+        <div className="font-brand text-3xl font-bold uppercase tracking-[0.1em] text-text">
+          Sirius
+        </div>
+        <h1 className="mt-1 font-brand text-xs font-semibold uppercase tracking-[0.35em] text-faint">
           Dashboard
         </h1>
         <p className="mt-2 text-sm text-muted">
