@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Space_Grotesk, Orbitron } from "next/font/google";
+import { LockPage } from "@/components/LockPage";
 import "./globals.css";
 
 const sans = Space_Grotesk({
@@ -32,7 +33,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR" className={`${sans.variable} ${brand.variable}`}>
-      <body>{children}</body>
+      <body>
+        <LockPage />
+        {children}
+      </body>
     </html>
   );
 }
