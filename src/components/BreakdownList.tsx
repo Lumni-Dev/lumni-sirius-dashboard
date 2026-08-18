@@ -31,7 +31,7 @@ export default function BreakdownList({ data }: { data: BreakdownItem[] }) {
             <div className="mb-1 flex items-baseline justify-between gap-3">
               <span className="truncate text-sm text-text">{item.label}</span>
               <span className="shrink-0 text-xs tabular-nums text-muted">
-                {fmtInt(item.requests)} · {fmtShare(share)}
+                {fmtInt(item.requests)} / {fmtShare(share)}
               </span>
             </div>
             <div className="h-1.5 w-full overflow-hidden rounded-full bg-fill">
