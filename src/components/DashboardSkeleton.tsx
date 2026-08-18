@@ -100,7 +100,7 @@ export default function DashboardSkeleton({
         </div>
 
         <div className="mt-6 grid gap-6 lg:grid-cols-2">
-          <Section title="Por modelo">
+          <Section title="Por nível">
             <ListSkeleton />
           </Section>
           <Section title="Por esforco">

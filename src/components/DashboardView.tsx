@@ -162,7 +162,7 @@ export default function DashboardView({
             </div>
 
             <div className="mt-6 grid gap-6 lg:grid-cols-2">
-              <Section title="Por modelo">
+              <Section title="Por nível">
                 <BreakdownList data={byModel} />
               </Section>
               <Section title="Por esforco">

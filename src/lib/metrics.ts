@@ -30,6 +30,15 @@ const EFFORT_PT: Record<string, string> = {
   max: "Máximo",
 };
 
+// Nao existe mais escolha de modelo: existe um so "Sirius" e o engine decide o
+// nivel (tier) por pedido, gravado em ingles lowercase. Aqui vira rotulo PT.
+const MODEL_PT: Record<string, string> = {
+  fast: "Rápido",
+  balanced: "Equilibrado",
+  capable: "Capaz",
+  deep: "Profundo",
+};
+
 const MODE_PT: Record<string, string> = {
   default: "Perguntar antes de executar",
   ask: "Pedir permissão",
@@ -59,7 +68,7 @@ export async function getMetrics(
     exists: Boolean(data.exists),
     overview: data.overview,
     series: fillGaps(data.series || [], rangeDays(range)),
-    byModel: data.byModel || [],
+    byModel: translateLabels(data.byModel || [], MODEL_PT),
     byEffort: translateLabels(data.byEffort || [], EFFORT_PT),
     byMode: translateLabels(data.byMode || [], MODE_PT),
     byPersona: data.byPersona || [],
